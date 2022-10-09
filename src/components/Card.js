@@ -2,21 +2,22 @@ import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-const Card = data => {
+const Card = ({data, onPress}) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.wrapper}>
-      <Image source={{uri: data.data.thumbnail}} style={styles.image} />
+    <TouchableOpacity
+      activeOpacity={0.8}
+      style={styles.wrapper}
+      onPress={onPress}>
+      <Image source={{uri: data.thumbnail}} style={styles.image} />
       <View style={styles.wrapperDiscount}>
-        <Text style={styles.discount}>
-          Off {data.data.discountPercentage} %
-        </Text>
+        <Text style={styles.discount}>Off {data.discountPercentage} %</Text>
       </View>
       <View style={styles.wrapperContent}>
         <View style={styles.wrapperTitle}>
-          <Text style={styles.title}>{data.data.title}</Text>
-          <Text style={styles.price}>{data.data.price}</Text>
+          <Text style={styles.title}>{data.title}</Text>
+          <Text style={styles.price}>{data.price}</Text>
         </View>
-        <Text style={styles.desc}>{data.data.description}</Text>
+        <Text style={styles.desc}>{data.description}</Text>
       </View>
     </TouchableOpacity>
   );

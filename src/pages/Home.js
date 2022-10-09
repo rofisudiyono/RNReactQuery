@@ -4,7 +4,7 @@ import {useQuery} from 'react-query';
 import {getListProducts} from '../api/GET_Products';
 import Card from '../components/Card';
 
-const Home = () => {
+const Home = ({navigation}) => {
   const {isLoading, data: dataProduct2} = useQuery(
     ['/getListProduct'],
     () => getListProducts(),
@@ -13,7 +13,9 @@ const Home = () => {
     },
   );
 
-  const renderItem = ({item}) => <Card data={item} />;
+  const renderItem = ({item}) => (
+    <Card data={item} onPress={() => navigation.navigate('Detail', item.id)} />
+  );
 
   return (
     <View>
