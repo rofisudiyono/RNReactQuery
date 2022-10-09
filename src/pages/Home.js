@@ -1,24 +1,19 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {getListProducts} from '../api/GET_Products';
 import Card from '../components/Card';
 
 const Home = () => {
-  const {
-    refetch,
-    isLoading,
-    data: dataProduct2,
-  } = useQuery(['/getListProduct'], () => getListProducts(), {
-    enabled: false,
-  });
+  const {isLoading, data: dataProduct2} = useQuery(
+    ['/getListProduct'],
+    () => getListProducts(),
+    {
+      enabled: true,
+    },
+  );
 
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
-  // console.log('data', JSON.stringify(dataProduct));
-  const renderItem = ({item}) => <Card />;
+  const renderItem = ({item}) => <Card data={item} />;
 
   return (
     <View>
@@ -31,6 +26,8 @@ const Home = () => {
           data={dataProduct2?.products}
           renderItem={renderItem}
           initialNumToRender={10}
+          contentContainerStyle={styles.content}
+          ItemSeparatorComponent={() => <View style={styles.gap} />}
         />
       )}
     </View>
@@ -45,4 +42,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  content: {margin: 10},
+  gap: {marginTop: 15},
 });
