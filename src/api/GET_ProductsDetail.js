@@ -7,6 +7,5 @@ export const getProductDetail = async id => {
     })
     .catch(e => {
       console.log(e);
-      return false;
     });
 };
