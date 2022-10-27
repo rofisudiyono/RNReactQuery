@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "iosM1": "arch -x86_64 yarn ios --simulator='iPhone 14'"
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.8",

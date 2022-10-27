@@ -1,16 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {QueryCache, QueryClient, QueryClientProvider} from 'react-query';
+import AddProduct from './pages/AddProduct';
 import Detail from './pages/Detail';
 import Home from './pages/Home';
 import Splash from './pages/Splash';
-import {
-  QueryClient,
-  QueryClientProvider,
-  dehydrate,
-  QueryCache,
-  Hydrate,
-} from 'react-query';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +19,7 @@ function MyStack() {
       />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Detail" component={Detail} />
+      <Stack.Screen name="AddProduct" component={AddProduct} />
     </Stack.Navigator>
   );
 }
@@ -35,12 +31,9 @@ const App = () => {
     defaultOptions: {
       queries: {
         retry: 2,
-        refetchOnWindowFocus: false,
       },
     },
   });
-
-  const dehydratedState = dehydrate(queryClient, {});
 
   if (__DEV__) {
     import('react-query-native-devtools').then(({addPlugin}) => {
@@ -50,9 +43,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <QueryClientProvider client={queryClient}>
-        <Hydrate state={dehydratedState}>
-          <MyStack />
-        </Hydrate>
+        <MyStack />
       </QueryClientProvider>
     </NavigationContainer>
   );

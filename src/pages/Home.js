@@ -3,6 +3,7 @@ import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
 import {useQuery} from 'react-query';
 import {getListProducts} from '../api/GET_Products';
 import Card from '../components/Card';
+import FloatMenu from '../components/FloatMenu';
 import Loading from '../components/Loading';
 
 const wait = timeout => {
@@ -34,6 +35,7 @@ const Home = ({navigation}) => {
   return (
     <View style={styles.page}>
       <FlatList
+        index
         data={dataProduct2?.products}
         renderItem={renderItem}
         initialNumToRender={10}
@@ -44,6 +46,7 @@ const Home = ({navigation}) => {
         ItemSeparatorComponent={() => <View style={styles.gap} />}
       />
       {isLoading && <Loading />}
+      <FloatMenu onPress={() => navigation.navigate('AddProduct')} />
     </View>
   );
 };
