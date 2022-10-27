@@ -1,6 +1,7 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
+import {StatusBar} from 'react-native';
 import {QueryCache, QueryClient, QueryClientProvider} from 'react-query';
 import AddProduct from './pages/AddProduct';
 import Detail from './pages/Detail';
@@ -31,6 +32,7 @@ const App = () => {
     defaultOptions: {
       queries: {
         retry: 2,
+        staleTime: 5000,
       },
     },
   });
@@ -42,6 +44,11 @@ const App = () => {
   }
   return (
     <NavigationContainer>
+      <StatusBar
+        animated={true}
+        backgroundColor="white"
+        barStyle={'dark-content'}
+      />
       <QueryClientProvider client={queryClient}>
         <MyStack />
       </QueryClientProvider>

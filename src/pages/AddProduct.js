@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {
-  ActivityIndicator,
-  Button,
   StyleSheet,
+  Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from 'react-native';
 import {useMutation, useQueryClient} from 'react-query';
@@ -17,25 +17,23 @@ const AddProduct = () => {
     await mutateAddProduct({title: nameProduct});
   };
 
-  const {mutateAsync: mutateAddProduct, isLoading} = useMutation(
-    addPostProduct,
-    {
-      onMutate: () => {
-        console.log('on Mutate');
-      },
-      onSuccess: data => {
-        console.log('on Success', data);
-        queryClient.invalidateQueries(['/getListProduct']);
-      },
-      onSettled: (data, error) => {
-        console.log('on Settle', JSON.stringify(data));
-        console.log('on Settle', error);
-      },
-      onError: error => {
-        console.log('error', error);
-      },
+  const {mutateAsync: mutateAddProduct, status} = useMutation(addPostProduct, {
+    onMutate: () => {
+      console.log('on Mutate');
     },
-  );
+    onSuccess: data => {
+      console.log('on Success', data);
+      queryClient.invalidateQueries(['/getListProduct']);
+    },
+    onSettled: (data, error) => {
+      console.log('on Settle', data);
+      console.log('on Settle', error);
+    },
+    onError: error => {
+      console.log('error', error);
+    },
+  });
+
   return (
     <View style={styles.page}>
       <TextInput
@@ -44,15 +42,11 @@ const AddProduct = () => {
         onChangeText={input => setNameProduct(input)}
       />
 
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        <Button
-          title="Save"
-          style={styles.button}
-          onPress={handleSaveProduct}
-        />
-      )}
+      <TouchableOpacity onPress={handleSaveProduct} style={styles.button}>
+        <Text style={styles.textSave}>Save</Text>
+      </TouchableOpacity>
+
+      <Text>status : {status}</Text>
     </View>
   );
 };
@@ -61,5 +55,20 @@ export default AddProduct;
 
 const styles = StyleSheet.create({
   page: {flex: 1, padding: 10},
-  textInput: {backgroundColor: 'white', padding: 15, borderRadius: 10},
+  textSave: {color: 'white'},
+  button: {
+    height: 54,
+    backgroundColor: 'black',
+    marginTop: 20,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  textInput: {
+    backgroundColor: 'white',
+    padding: 15,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'gray',
+  },
 });
