@@ -1,11 +1,13 @@
 import {ApiInstance} from './ApiInstance';
 
-export const getProductDetail = async () => {
-  return ApiInstance.get('/products/add')
+export const addPostProduct = async nameProduct => {
+  return ApiInstance.post('/products/add', {
+    nameProduct,
+  })
     .then(response => {
-      return response.data;
+      return response;
     })
     .catch(e => {
-      console.log(e);
+      console.log('error', e);
     });
 };
