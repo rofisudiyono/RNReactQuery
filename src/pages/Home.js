@@ -36,7 +36,7 @@ const Home = ({navigation}) => {
     <View style={styles.page}>
       <FlatList
         keyExtractor={(item, index) => {
-          return item.id + index;
+          return item.id;
         }}
         data={dataProduct2?.products}
         renderItem={renderItem}

@@ -32,7 +32,6 @@ const App = () => {
     defaultOptions: {
       queries: {
         retry: 2,
-        staleTime: 5000,
       },
     },
   });
