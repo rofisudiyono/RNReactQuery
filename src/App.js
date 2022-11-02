@@ -6,7 +6,10 @@ import {QueryCache, QueryClient, QueryClientProvider} from 'react-query';
 import AddProduct from './pages/AddProduct';
 import Detail from './pages/Detail';
 import Home from './pages/Home';
+import Product from './pages/Product';
 import Splash from './pages/Splash';
+import CrudReactQuery from './pages/CrudReactQuery';
+import CrudReduxQuery from './pages/CrudReduxQuery';
 
 const Stack = createStackNavigator();
 
@@ -21,6 +24,9 @@ function MyStack() {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="AddProduct" component={AddProduct} />
+      <Stack.Screen name="Product" component={Product} />
+      <Stack.Screen name="CrudReactQuery" component={CrudReactQuery} />
+      <Stack.Screen name="CrudReduxQuery" component={CrudReduxQuery} />
     </Stack.Navigator>
   );
 }
