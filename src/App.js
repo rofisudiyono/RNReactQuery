@@ -2,14 +2,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {StatusBar} from 'react-native';
-import {QueryCache, QueryClient, QueryClientProvider} from 'react-query';
-import AddProduct from './pages/AddProduct';
-import Detail from './pages/Detail';
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import Home from './pages/Home';
-import Product from './pages/Product';
 import Splash from './pages/Splash';
-import CrudReactQuery from './pages/CrudReactQuery';
-import CrudReduxQuery from './pages/CrudReduxQuery';
+import FlashMessage from 'react-native-flash-message';
 
 const Stack = createStackNavigator();
 
@@ -22,11 +22,6 @@ function MyStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Detail" component={Detail} />
-      <Stack.Screen name="AddProduct" component={AddProduct} />
-      <Stack.Screen name="Product" component={Product} />
-      <Stack.Screen name="CrudReactQuery" component={CrudReactQuery} />
-      <Stack.Screen name="CrudReduxQuery" component={CrudReduxQuery} />
     </Stack.Navigator>
   );
 }
@@ -57,6 +52,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <MyStack />
       </QueryClientProvider>
+      <FlashMessage position="top" />
     </NavigationContainer>
   );
 };
