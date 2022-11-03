@@ -1,3 +1,5 @@
+import NetInfo from '@react-native-community/netinfo';
+import {onlineManager} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {
   ActivityIndicator,
@@ -18,8 +20,6 @@ import {
   useEditActivity,
   useGetActivity,
 } from '../hooks/queryActivity';
-import NetInfo from '@react-native-community/netinfo';
-import {onlineManager} from '@tanstack/react-query';
 
 const CrudReactQuery = () => {
   const [activityName, setActivityName] = useState('');
@@ -42,14 +42,6 @@ const CrudReactQuery = () => {
       setOnline(!!state.isConnected);
     });
   });
-
-  const onSuccess = data => {
-    console.log('data', data);
-  };
-
-  const onError = error => {
-    console.log(error);
-  };
 
   const {mutateAsync: mutateDeleteActivity, status: statusDelete} =
     useDeleteActivity(onSuccessDel);
@@ -118,7 +110,10 @@ const CrudReactQuery = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         {dataActivity?.data.map((item, index) => {
           return (
-            <View key={index} style={styles.card}>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              key={index}
+              style={styles.card}>
               <Text style={styles.textTitle}>{item.title}</Text>
               <Text style={styles.textTime}>{item.created_at}</Text>
               <View style={styles.wrapper}>
@@ -137,7 +132,7 @@ const CrudReactQuery = () => {
                   onPress={() => _handleDeleteActivity(item.id)}
                 />
               </View>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
