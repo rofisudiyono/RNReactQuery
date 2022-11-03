@@ -29,8 +29,8 @@ const CrudReactQuery = () => {
   const {data: dataActivity, isLoading, refetch} = useGetActivity();
 
   const {mutateAsync: mutateAddActivity, status} = useAddActivity(
-    () => {
-      console.log('sukses');
+    data => {
+      console.log('sukses', data);
     },
     () => {
       console.log('error');
@@ -42,6 +42,9 @@ const CrudReactQuery = () => {
       setOnline(!!state.isConnected);
     });
   });
+
+  const isOnline = onlineManager.isOnline();
+  console.log(isOnline);
 
   const {mutateAsync: mutateDeleteActivity, status: statusDelete} =
     useDeleteActivity(onSuccessDel);
@@ -55,7 +58,7 @@ const CrudReactQuery = () => {
   );
 
   const onSuccessDel = data => {
-    console.log(data);
+    console.log('>>>', data);
     refetch();
   };
 
@@ -73,7 +76,7 @@ const CrudReactQuery = () => {
 
   const _handleWarning = async () => {
     showMessage({
-      message: 'Nama Produk wajib diisi',
+      message: 'Nama aktivitas wajib diisi',
       type: 'danger',
     });
   };
@@ -94,7 +97,7 @@ const CrudReactQuery = () => {
       </View>
       <TextInput
         style={styles.textInput}
-        placeholder="Masukkan nama produk"
+        placeholder="Masukkan nama aktivitas"
         onChangeText={input => setActivityName(input)}
         value={activityName}
       />
@@ -149,7 +152,7 @@ const CrudReactQuery = () => {
           <View style={styles.modalView}>
             <TextInput
               style={styles.textInput}
-              placeholder="Masukkan nama produk"
+              placeholder="Masukkan nama aktivitas"
               onChangeText={input => setActivityName(input)}
               value={activityName}
             />
