@@ -1,5 +1,4 @@
-import NetInfo from '@react-native-community/netinfo';
-import {onlineManager} from '@tanstack/react-query';
+import {useQueryClient} from '@tanstack/react-query';
 import React, {useState} from 'react';
 import {
   ActivityIndicator,
@@ -22,45 +21,35 @@ import {
 } from '../hooks/queryActivity';
 
 const CrudReactQuery = () => {
+  const queryClient = useQueryClient();
   const [activityName, setActivityName] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [dataSelected, setDataSelected] = useState({});
 
-  const {data: dataActivity, isLoading, refetch} = useGetActivity();
+  const {data: dataActivity, isLoading} = useGetActivity();
 
   const {mutateAsync: mutateAddActivity, status} = useAddActivity(
-    data => {
-      console.log('sukses', data);
+    () => {
+      queryClient.invalidateQueries();
     },
     () => {
       console.log('error');
     },
   );
 
-  onlineManager.setEventListener(setOnline => {
-    return NetInfo.addEventListener(state => {
-      setOnline(!!state.isConnected);
-    });
-  });
-
-  const isOnline = onlineManager.isOnline();
-  console.log(isOnline);
-
   const {mutateAsync: mutateDeleteActivity, status: statusDelete} =
-    useDeleteActivity(onSuccessDel);
+    useDeleteActivity(() => {
+      queryClient.invalidateQueries();
+    });
 
   const {mutateAsync: mutateEditActivity} = useEditActivity(
     () => {
       setIsModalVisible(false);
+      queryClient.invalidateQueries();
     },
     dataSelected.id,
     activityName,
   );
-
-  const onSuccessDel = data => {
-    console.log('>>>', data);
-    refetch();
-  };
 
   const _handleSaveActivity = async () => {
     await mutateAddActivity(activityName);

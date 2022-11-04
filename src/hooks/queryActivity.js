@@ -17,12 +17,13 @@ export const useAddActivity = (onSuccess, onError) => {
     onError,
   });
 };
-export const useDeleteActivity = onSuccessDel => {
+export const useDeleteActivity = onSuccess => {
   return useMutation(deleteActivity, {
-    onSuccess: onSuccessDel,
+    onSuccess,
     onError: () => {
       showMessage({
         message: 'delete failed',
+        type: 'danger',
       });
     },
   });
