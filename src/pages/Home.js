@@ -20,7 +20,7 @@ import {
   useGetActivity,
 } from '../hooks/queryActivity';
 
-const CrudReactQuery = () => {
+const Home = () => {
   const queryClient = useQueryClient();
   const [activityName, setActivityName] = useState('');
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -162,7 +162,7 @@ const CrudReactQuery = () => {
   );
 };
 
-export default CrudReactQuery;
+export default Home;
 
 const styles = StyleSheet.create({
   wrapperTextLoading: {flexDirection: 'row', alignItems: 'center'},
