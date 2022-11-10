@@ -1,22 +1,12 @@
-import {Button, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {Button, StyleSheet, View} from 'react-native';
 
 const Home = ({navigation}) => {
   return (
     <View style={styles.page}>
       <Button
-        title="go to product"
-        onPress={() => navigation.navigate('Product')}
-      />
-      <View style={styles.box} />
-      <Button
-        title="go to CRUD React Query"
-        onPress={() => navigation.navigate('CrudReactQuery')}
-      />
-      <View style={styles.box} />
-      <Button
-        title="go to CRUD Redux Query"
-        onPress={() => navigation.navigate('CrudReduxQuery')}
+        title="Counter"
+        onPress={() => navigation.navigate('CounterScreen')}
       />
     </View>
   );

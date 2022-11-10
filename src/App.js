@@ -2,14 +2,14 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import React from 'react';
 import {StatusBar} from 'react-native';
-import {QueryCache, QueryClient, QueryClientProvider} from 'react-query';
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
 import AddProduct from './pages/AddProduct';
 import Detail from './pages/Detail';
 import Home from './pages/Home';
 import Product from './pages/Product';
 import Splash from './pages/Splash';
-import CrudReactQuery from './pages/CrudReactQuery';
-import CrudReduxQuery from './pages/CrudReduxQuery';
+import CounterScreen from './pages/CounterScreen';
 
 const Stack = createStackNavigator();
 
@@ -25,28 +25,12 @@ function MyStack() {
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="AddProduct" component={AddProduct} />
       <Stack.Screen name="Product" component={Product} />
-      <Stack.Screen name="CrudReactQuery" component={CrudReactQuery} />
-      <Stack.Screen name="CrudReduxQuery" component={CrudReduxQuery} />
+      <Stack.Screen name="CounterScreen" component={CounterScreen} />
     </Stack.Navigator>
   );
 }
 
 const App = () => {
-  const queryCache = new QueryCache();
-  const queryClient = new QueryClient({
-    queryCache,
-    defaultOptions: {
-      queries: {
-        retry: 2,
-      },
-    },
-  });
-
-  if (__DEV__) {
-    import('react-query-native-devtools').then(({addPlugin}) => {
-      addPlugin({queryClient});
-    });
-  }
   return (
     <NavigationContainer>
       <StatusBar
@@ -54,9 +38,9 @@ const App = () => {
         backgroundColor="white"
         barStyle={'dark-content'}
       />
-      <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
         <MyStack />
-      </QueryClientProvider>
+      </Provider>
     </NavigationContainer>
   );
 };

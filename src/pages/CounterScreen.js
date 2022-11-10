@@ -1,14 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 
-const CrudReduxQuery = () => {
+const CounterScreen = () => {
   return (
     <View>
-      <Text>CrudReduxQuery</Text>
+      <Text>CounterScreen</Text>
     </View>
   );
 };
 
-export default CrudReduxQuery;
+export default CounterScreen;
 
 const styles = StyleSheet.create({});

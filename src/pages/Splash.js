@@ -10,7 +10,7 @@ const Splash = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>React Query as State Management</Text>
+      <Text style={styles.text}>Redux Toolkit Query as State Management</Text>
     </View>
   );
 };
