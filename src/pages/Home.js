@@ -18,6 +18,10 @@ const Home = ({navigation}) => {
         title="go to CRUD Redux Query"
         onPress={() => navigation.navigate('CrudReduxQuery')}
       />
+      <Button
+        title="Animations"
+        onPress={() => navigation.navigate('Animations')}
+      />
     </View>
   );
 };

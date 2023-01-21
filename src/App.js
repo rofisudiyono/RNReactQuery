@@ -10,12 +10,13 @@ import Product from './pages/Product';
 import Splash from './pages/Splash';
 import CrudReactQuery from './pages/CrudReactQuery';
 import CrudReduxQuery from './pages/CrudReduxQuery';
+import PanGestureHandlerReanimated from './pages/PanGestureHandlerReanimated';
 
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator initialRouteName="PanGestureHandlerReanimated">
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -27,6 +28,10 @@ function MyStack() {
       <Stack.Screen name="Product" component={Product} />
       <Stack.Screen name="CrudReactQuery" component={CrudReactQuery} />
       <Stack.Screen name="CrudReduxQuery" component={CrudReduxQuery} />
+      <Stack.Screen
+        name="PanGestureHandlerReanimated"
+        component={PanGestureHandlerReanimated}
+      />
     </Stack.Navigator>
   );
 }
