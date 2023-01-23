@@ -31,6 +31,7 @@ function MyStack() {
       <Stack.Screen
         name="PanGestureHandlerReanimated"
         component={PanGestureHandlerReanimated}
+        options={{headerShown: 'false'}}
       />
     </Stack.Navigator>
   );
